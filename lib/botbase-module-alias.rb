@@ -2,8 +2,9 @@
 
 # file: botbase-module-alias.rb
 
-# A service module (used by the BotBase gem) intended to interpret verbose statements into 
-# known alias commands e.g. create a random password => lpa (leet_password).
+# A service module (used by the BotBase gem) intended to interpret verbose 
+# statements into known alias commands e.g. create a random 
+# password => lpa (leet_password).
 
 require 'dynarex'
 
@@ -23,7 +24,6 @@ class BotBaseModuleAlias
     s, _ = RXFHelper.read aliases
     @dx = Dynarex.new
     @dx.import aliases
-
     
   end
 
@@ -39,7 +39,10 @@ class BotBaseModuleAlias
     if a.any? then
            
       msg=a[0][0].aliasname
-      notice msg
+
+      if @bot.log then
+        @bot.log.info 'BotBaseModuleAlias/query: found ' + msg
+      end
       
       @bot.received(msg, mode: mode, echo_node: echo_node)
            
@@ -47,12 +50,6 @@ class BotBaseModuleAlias
       ''
     end
            
-  end
-  
-  private
-  
-  def notice(msg)
-    @bot.debug msg if @bot
-  end
+  end  
 
 end
