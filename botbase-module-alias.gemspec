@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'botbase-module-alias'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.summary = 'A botbase module plugin which matched a verbose command with ' + 
       'a known alias command from a lookup file.'
   s.authors = ['James Robertson']

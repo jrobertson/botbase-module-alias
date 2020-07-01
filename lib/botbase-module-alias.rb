@@ -13,17 +13,16 @@ end
 
 class BotBaseModuleAlias
   
-  def initialize(aliases: nil, callback: nil)
+  def initialize(aliases: nil, callback: nil, debug: false)
+
+    @debug = debug
     
     if aliases.nil? then
       raise BotBaseModuleAliasException, 'aliases must be provided' 
     end
     
-    @bot = callback    
-    
-    s, _ = RXFHelper.read aliases
-    @dx = Dynarex.new
-    @dx.import aliases
+    @bot = callback       
+    @dx = Dynarex.new aliases
     
   end
 
@@ -35,11 +34,14 @@ class BotBaseModuleAlias
       found ? r << [x, found] : r
 
     end
+    puts ': ' + a.inspect
     
     if a.any? then
            
       msg=a[0][0].aliasname
 
+      puts 'msg: ' + msg.inspect
+      
       if @bot.log then
         @bot.log.info 'BotBaseModuleAlias/query: found ' + msg
       end
